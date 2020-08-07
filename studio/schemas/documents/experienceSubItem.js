@@ -3,7 +3,7 @@ import experimentIcon from "react-icons/lib/md/extension";
 export default {
   name: "experienceSubItem",
   type: "document",
-  title: "Experience Inner Boxes",
+  title: "Experience Inner Boxess",
   icon: experimentIcon,
   fields: [
     {
