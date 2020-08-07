@@ -87,7 +87,7 @@ const ProjectTemplate = props => {
   return (
     <Layout>
       {errors && <SEO title="GraphQL Error" />}
-      {project && <SEO title={project.title || "Untitled"} />}
+      {project && <SEO title={project.title || "Untitleds"} />}
 
       {errors && (
         <Container>
