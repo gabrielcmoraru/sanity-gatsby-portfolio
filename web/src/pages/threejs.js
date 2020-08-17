@@ -18,7 +18,12 @@ export const query = graphql`
       edges {
         node {
           name
+          _createdAt(formatString: "MMMM DD, YYYY")
           _rawDescription
+          categories {
+            title
+            description
+          }
           logo {
             asset {
               fluid(maxWidth: 700) {
@@ -29,6 +34,7 @@ export const query = graphql`
           subItems {
             name
             _rawDescription
+            keywords
             logo {
               asset {
                 fixed(width: 100) {
@@ -74,44 +80,75 @@ const ThreeJsPage = props => {
         <h1>Main Cubes</h1>
         {mainCube &&
           mainCube.edges.map(main => (
-            <div key={Math.random()}>
-              <h2>TITLE -> {main.node.name}</h2>
-              <h3>DESCRIPTION:</h3>
-              {main.node._rawDescription && (
-                <BlockContent blocks={main.node._rawDescription || []} />
-              )}
-              {main.node.logo.asset.fluid && (
-                <Img
-                  fluid={main.node.logo.asset.fluid}
-                  objectFit="cover"
-                  objectPosition="50% 50%"
-                  alt=""
-                />
-              )}
-              {main.node.subItems && (
-                <>
-                  <h3>Sub Items:</h3>
-                  <ul>
-                    {main.node.subItems.map(subItem => (
-                      <li key={Math.random()}>
-                        <p>TITLE -> {subItem.name}</p>
-                        <h3>DESCRIPTION:</h3>
-
-                        {subItem._rawDescription && (
-                          <BlockContent blocks={subItem._rawDescription || []} />
-                        )}
-                        <Img
-                          fixed={subItem.logo.asset.fixed}
-                          objectFit="cover"
-                          objectPosition="50% 50%"
-                          alt=""
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
+            <>
+              <div key={Math.random()}>
+                <h2>TITLE -> {main.node.name}</h2>
+                <p>ADDED ON -> {main.node._createdAt}</p>
+                <h3>DESCRIPTION:</h3>
+                {main.node._rawDescription && (
+                  <BlockContent blocks={main.node._rawDescription || []} />
+                )}
+                {main.node.logo.asset.fluid && (
+                  <Img
+                    fluid={main.node.logo.asset.fluid}
+                    objectFit="cover"
+                    objectPosition="50% 50%"
+                    alt=""
+                  />
+                )}
+                {main.node.categories &&
+                  main.node.categories.map(category => (
+                    <>
+                      <div>
+                        <h4>CATEGORY: {category.title}</h4>
+                        <p>CATEGORY DESCRIPTION: {category.description}</p>
+                      </div>
+                    </>
+                  ))}
+                {main.node.subItems && (
+                  <>
+                    <h3>Sub Items:</h3>
+                    <ul>
+                      {main.node.subItems.map(subItem => (
+                        <li key={Math.random()}>
+                          <p>TITLE -> {subItem.name}</p>
+                          {subItem._rawDescription && (
+                            <>
+                              <h3>DESCRIPTION:</h3>
+                              <BlockContent blocks={subItem._rawDescription || []} />
+                            </>
+                          )}
+                          <Img
+                            fixed={subItem.logo.asset.fixed}
+                            objectFit="cover"
+                            objectPosition="50% 50%"
+                            alt=""
+                          />
+                          {subItem.keywords && (
+                            <>
+                              <h3>KEYWORDS:</h3>
+                              <ul>
+                                {subItem.keywords.map(item => (
+                                  <li key={Math.random()}>{item}</li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "10px",
+                  backgroundColor: "black",
+                  margin: "150px 0"
+                }}
+              />
+            </>
           ))}
       </Container>
     </Layout>
