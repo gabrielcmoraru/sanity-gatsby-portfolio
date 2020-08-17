@@ -34,9 +34,9 @@ export default createSchema({
     simplePortableText,
     // The following are document types which will appear
     // in the studio.
+    category,
     experience,
     experienceSubItem,
-    category,
     person,
     sampleProject,
     siteSettings

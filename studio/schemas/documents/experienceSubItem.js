@@ -20,6 +20,16 @@ export default {
       name: "logo",
       title: "Logo",
       type: "figure"
+    },
+    {
+      name: "keywords",
+      type: "array",
+      title: "Keywords",
+      description: "Add keywords that describes this item.",
+      of: [{ type: "string" }],
+      options: {
+        layout: "tags"
+      }
     }
   ],
   preview: {

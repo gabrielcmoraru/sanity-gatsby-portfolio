@@ -26,6 +26,21 @@ export default {
       title: "Sub items",
       type: "array",
       of: [{ type: "reference", to: { type: "experienceSubItem" } }]
+    },
+    {
+      name: "categories",
+      type: "array",
+      title: "Categories",
+      of: [
+        {
+          type: "reference",
+          to: [
+            {
+              type: "category"
+            }
+          ]
+        }
+      ]
     }
   ],
   preview: {
